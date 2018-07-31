@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import logo from './logo.svg';
 import Nav from './components/Nav';
+import Home from './pages/Home';
+import Gallery from './pages/Gallery';
 import NoMatch from './pages/NoMatch';
 
 import './App.css';
@@ -12,18 +14,16 @@ class App extends Component {
       <Router>
         <div className="">
           <Nav />
+          <div className="App w-100">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Welcome to React</h1>
+          </header>
           <Switch>
-            <div className="App w-100">
-              <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1 className="App-title">Welcome to React</h1>
-              </header>
-              <p className="App-intro">
-                Welcome to my new portfolio. It's currently under construction, so please visit my old html/javascript portfolio in the mean time. 
-              </p>
-              <a href="https://ericng314.github.io/Portfolio/">https://ericng314.github.io/Portfolio/</a>
-            </div>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/gallery" component={Gallery} />
           </Switch>
+          </div>
         </div>
       </Router>
     );

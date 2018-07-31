@@ -6,7 +6,7 @@ const Navbar = () => (
     <a className="navbar-brand text-dark d-block" href="/">Eric Ng</a>
     <hr />
     <a className="nav-item d-block" href="/">Home</a>
-    <a className="nav-item d-block" href="/projects">Projects</a>
+    <a className="nav-item d-block" href="/gallery">Gallery</a>
     <a className="nav-item d-block" href="/contact">Contact</a>
   </nav>
 )
