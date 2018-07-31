@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import logo from './logo.svg';
 import Nav from './components/Nav';
+import NoMatch from './pages/NoMatch';
 
 import './App.css';
 
