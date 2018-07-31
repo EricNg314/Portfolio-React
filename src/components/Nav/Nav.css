@@ -5,3 +5,7 @@
 .align-items-none {
   align-items: unset;
 }
+
+.pos-fix {
+  position: fixed;
+}

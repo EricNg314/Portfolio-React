@@ -7,7 +7,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="d-flex">
+      <div className="">
         <Nav />
         <div className="App w-100">
           <header className="App-header">
