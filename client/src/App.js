@@ -22,6 +22,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/gallery" component={Gallery} />
+            <Route component={NoMatch} />
           </Switch>
           </div>
         </div>
