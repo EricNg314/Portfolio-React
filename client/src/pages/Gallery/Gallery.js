@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Col, Row, Container } from "../../components/Grid";
+import { getAllProjects } from '../../utils/API';
+
+import { Col, Row, Container } from '../../components/Grid';
 
 class Gallery extends Component {
 
@@ -7,13 +9,13 @@ class Gallery extends Component {
     projectss: []
   }
 
-  componentDidMount (){
+  componentDidMount() {
     this.loadProjects();
   }
 
   //Function to add projects.
   loadProjects = () => {
-    //API.getProjects
+    getAllProjects();
   }
 
   render() {
@@ -24,7 +26,7 @@ class Gallery extends Component {
         </h1>
         <div className='text-center'>
           <p className="App-intro">
-            Welcome to my new portfolio. It's currently under construction, so please visit my old html/javascript portfolio in the mean time. 
+            Welcome to my new portfolio. It's currently under construction, so please visit my old html/javascript portfolio in the mean time.
           </p>
           <a href="https://ericng314.github.io/Portfolio/">https://ericng314.github.io/Portfolio/</a>
         </div>
