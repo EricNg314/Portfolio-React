@@ -3,19 +3,36 @@ import './AboutMe.css';
 
 const AboutMe = () => (
   <div>
-    <h2>My name is Eric Ng.</h2>
+        <div className="parallax-100vh">
+            <div className="caption">
+              <span className='text-light bg-dark h1 p-3 round-corner'>Welcome to my story.</span>
+            </div>
+          </div>
 
-    <h3>Graduated with an Economics background and was given a opportunity as an Accountant at FasTrak.</h3>
+          <div className="parallax-bg ">
+            <div className='container bg-white box-shadow'>
+              <h1 className='text-center p-3'>My name is Eric!</h1>
+              <h3 className='my-0 p-3'>I graduated with an economics degree and was given an opportunity at FasTrak as an Accountant. Using online resources, I learned to code in Visual Basic Application to automate work. </h3>
+            </div>
+          </div>
 
-    <h3>I learned to code in Visual Basic Application to speed up work. Eventually I created a program that automatically reconciled and compared a hundred reports daily.</h3>
+          <div className="parallax-150px">
+          </div>
 
-    <h3>When we added BAIFA to the FasTrak program. They came with their own express lanes, another set of rules and financial transactions.</h3>
+          <div className="parallax-bg">
+            <div className='container bg-white box-shadow'>
+              <h3 className='p-3 my-0'>As we integrated BAIFA express lanes to the FasTrak program. They came with their own set of rules and financial transactions. I was in charge of updating reports in SAP Crystal and documentation from a finance perspective.</h3>
+            </div>
+          </div>
 
-    <h3>I was in charge of updating reports in SAP Crystal and documentation from a finance perspective.</h3>
+          <div className="parallax-150px">
+          </div>
 
-    <h3>I wanted to a new challenge... I wanted to build applications. So I jumped into UC Berkeley's Coding Bootcamp.</h3>
-
-    <h3>After graduation, I am now a Teaching Assistant for the Data Analytics Bootcamp at UC Berkeley Extension.</h3>
+          <div className="parallax-bg">
+            <div className='container bg-white box-shadow'>
+            <h3 className='my-0 p-3'>Something was still missing inside me. I realized I wanted to build applications. Thus I took the leap of faith into UC Berkeley's Coding Bootcamp. After graduating, I am now a Teaching Assistant for their Data Analytics Bootcamp.</h3>
+            </div>
+          </div>
 
   </div>
 );

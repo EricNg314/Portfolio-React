@@ -28,7 +28,7 @@ class Home extends Component {
           <p className="App-intro">
             Welcome to my new portfolio. It's currently under construction, so please visit my old html/javascript portfolio in the mean time. 
           </p>
-          <a href="https://ericng314.github.io/Portfolio/">https://ericng314.github.io/Portfolio/</a>
+          <a href="https://ericng314.github.io/Portfolio/">https://eric-ng.io/</a>
         </div>
 
     )
