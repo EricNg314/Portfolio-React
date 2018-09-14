@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import logo from './logo.svg';
+// import logo from './logo.svg';
+// import { Container } from './components/Grid';
 import Nav from './components/Nav';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import NoMatch from './pages/NoMatch';
+import AboutMe from './components/AboutMe';
 
 import './App.css';
 
@@ -14,16 +16,15 @@ class App extends Component {
       <Router>
         <div className="">
           <Nav />
+          <AboutMe />
+
           <div className="App w-100">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/gallery" component={Gallery} />
-            <Route component={NoMatch} />
-          </Switch>
+
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/gallery" component={Gallery} />
+              <Route component={NoMatch} />
+            </Switch>
           </div>
         </div>
       </Router>
