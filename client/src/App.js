@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import NoMatch from './pages/NoMatch';
+import AboutMe from './components/AboutMe';
 
 import './App.css';
 
@@ -19,6 +20,7 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to React</h1>
           </header>
+          <AboutMe />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/gallery" component={Gallery} />
