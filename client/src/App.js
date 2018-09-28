@@ -11,6 +11,16 @@ import AboutMe from './components/AboutMe';
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    projects: []
+  }
+
+  componentDidMount(){
+    
+  }
+
+
   render() {
     return (
       <Router>
