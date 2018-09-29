@@ -2,7 +2,7 @@ import React from 'react';
 import './AboutMe.css';
 
 const AboutMe = () => (
-  <div>
+  <div id="aboutId">
     <div className="parallax-100vh about_bg-img1">
       <div className="caption">
         <span className='text-light bg-dark h1 p-3 round-corner'>Welcome to my story.</span>

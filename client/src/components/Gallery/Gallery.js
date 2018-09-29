@@ -2,7 +2,7 @@ import React from "react";
 import './Gallery.css';
 
 const Gallery = () => (
-  <div>
+  <div id="galleryId">
     <div className="parallax-100vh gallery_bg-img1">
         <br></br>
         <div className="container">
