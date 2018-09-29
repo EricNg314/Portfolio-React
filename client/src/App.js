@@ -19,11 +19,13 @@ class App extends Component {
   }
 
   componentDidMount(){
-    console.log(this.getAllProjects());
+    this.getAllProjects();
   }
 
-  getAllProjects = () => {
-    getAllProjectsAWS();
+  getAllProjects = async () => {
+    const data = await getAllProjectsAWS();
+    console.log(data['data']);
+    this.setState({projects: data['data']});
   }
 
 
