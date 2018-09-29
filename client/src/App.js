@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
 import AboutMe from './components/AboutMe';
 import Gallery from './components/Gallery';
+import { getAllProjectsAWS } from './utils/API';
 
 import './App.css';
 
@@ -18,7 +19,11 @@ class App extends Component {
   }
 
   componentDidMount(){
-    
+    console.log(this.getAllProjects());
+  }
+
+  getAllProjects = () => {
+    getAllProjectsAWS();
   }
 
 
