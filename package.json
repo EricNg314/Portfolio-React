@@ -11,6 +11,7 @@
     "client": "cd client && npm run start",
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
+    "postbuild": "mv client/build .",
     "deploy": "gh-pages -d build",
     "heroku-postbuild": "npm run build"
   },
