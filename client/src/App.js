@@ -15,17 +15,17 @@ import './App.css';
 class App extends Component {
 
   state = {
-    projects: []
+    projects: [],
+    tagBtnList: ["Show All", "Entertainment", "HTML", "CSS", "Javascript", "jQuery", "Bootstrap", "API", "Google Firebase", "Express.js", "Node.js", "SQL", "Sequelize", "MongoDB", "React", "Redux", "Handlebars"]
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getAllProjects();
   }
 
   getAllProjects = async () => {
     const data = await getAllProjectsAWS();
-    console.log(data['data']);
-    this.setState({projects: data['data']});
+    this.setState({ projects: data['data'] });
   }
 
 
@@ -35,12 +35,16 @@ class App extends Component {
         <div className="">
           <Nav />
           <AboutMe />
-          <Gallery />
+          <Gallery
+            tagBtnList={this.state.tagBtnList}
+            projects={this.state.projects}
+          />
 
           <div className="App w-100">
 
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/Portfolio-React/" component={Home} />
               {/* <Route exact path="/gallery" component={Gallery} /> */}
               <Route component={NoMatch} />
             </Switch>
