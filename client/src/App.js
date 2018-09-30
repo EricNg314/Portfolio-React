@@ -24,8 +24,8 @@ class App extends Component {
   }
 
   getAllProjects = async () => {
-    const data = await getAllProjectsAWS();
-    this.setState({ projects: data['data'] });
+    const response = await getAllProjectsAWS();
+    this.setState({ projects: response['data']['data'] });
   }
 
 
@@ -45,7 +45,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/Portfolio-React/" component={Home} />
-              {/* <Route exact path="/gallery" component={Gallery} /> */}
+              <Route exact path="/gallery" component={Gallery} />
               <Route component={NoMatch} />
             </Switch>
           </div>

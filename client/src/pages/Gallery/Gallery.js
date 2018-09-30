@@ -15,7 +15,8 @@ class Gallery extends Component {
 
   //Function to add projects.
   loadProjects = () => {
-    getAllProjects();
+    // Temporarily disabling to avoid too many api calls.
+    // getAllProjects();
   }
 
   render() {
