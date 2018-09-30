@@ -1,10 +1,14 @@
 import React from 'react';
-import './Gallery.css';
 import TagBtns from '../TagBtns';
+import ProjectCard from '../ProjectCard';
+
+import './Gallery.css';
 
 const Gallery = props => {
   const tagBtnList = props['tagBtnList'];
   const projects = props['projects'];
+  // let tagReqArr = props['tagReqArr']
+
   console.log(tagBtnList);
   console.log(projects);
 
@@ -31,7 +35,7 @@ const Gallery = props => {
   };
 
 
-  console.log(displayProjects(['Show All', 'React']));
+  console.log(displayProjects(['Show All']));
 
 
 
@@ -44,15 +48,22 @@ const Gallery = props => {
           <div className="row">
             <div className="col-3">
               {tagBtnList.map((tagName, index) => (
-                <TagBtns 
-                key={index}
-                tagName = {tagName}
-                
+                <TagBtns
+                  key={index}
+                  tagName={tagName}
+
                 />
               ))}
             </div>
             <div className="col-9">
-
+              <div className="row">
+                {displayProjects(['Show All']).map((project, index) => (
+                  <ProjectCard
+                    key={index}
+                    project={project}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
