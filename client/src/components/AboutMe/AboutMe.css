@@ -8,6 +8,12 @@
 
 }
 
+.about-arrow-styles {
+  font-size: 50pt;
+  color: ghostwhite!important;
+  text-decoration: none!important;
+}
+
 .round-corner{
   border-radius: 15px;
 }
@@ -52,7 +58,7 @@
 
 .caption {
   position:relative;
-  top: 50%;
+  top: 40%;
   width:100%;
   text-align:center;
 }
@@ -68,5 +74,4 @@
 .bg-size-auto{
   background-size: auto!important;
 }
-
 
