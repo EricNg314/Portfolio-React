@@ -15,7 +15,7 @@ import './App.css';
 class App extends Component {
 
   state = {
-    tagBtnList: ['Show All', 'Entertainment', 'HTML', 'CSS', 'Javascript', 'jQuery', 'Bootstrap', 'API', 'Google Firebase', 'Express.js', 'Node.js', 'SQL', 'Sequelize', 'MongoDB', 'React', 'Redux', 'Handlebars'],
+    tagBtnList: ['Entertainment', 'HTML', 'CSS', 'Javascript', 'jQuery', 'Bootstrap', 'API', 'Google Firebase', 'Express.js', 'Node.js', 'SQL', 'Sequelize', 'MongoDB', 'React', 'Redux', 'Handlebars'],
     projects: [],
     tagReqArr: ['Show All'],
     display_projects: []
@@ -61,6 +61,7 @@ class App extends Component {
   }
 
   selectTag = (selectedTag) => {
+    document.getElementById('tagCustRadioId').checked = true;
     let currTags = this.state.tagReqArr;
     
     if(currTags.indexOf(selectedTag) === -1){
@@ -77,6 +78,10 @@ class App extends Component {
     }
   }
 
+  clearTagFilter = () => {
+    this.setState({tagReqArr: ['Show All']});
+    this.updateStateDisplay(this.state.tagReqArr);
+  }
 
   render() {
     return (
@@ -87,6 +92,7 @@ class App extends Component {
           <Gallery
             tagBtnList={this.state.tagBtnList}
             selectTag = {this.selectTag}
+            clearTagFilter = {this.clearTagFilter}
             tagReqArr = {this.state.tagReqArr}
             projects={this.state.display_projects}
           />
