@@ -30,15 +30,13 @@ class App extends Component {
     const response = await getAllProjectsAWS();
     console.log(response);
     this.setState({ projects: response['data']['data'] });
-    const display = this.displayProjects(this.state.tagReqArr);
-    this.setState({ display_projects: display});
+    this.updateStateDisplay(this.state.tagReqArr);
 
   }
 
   // Selecting a project only if all selected tag array are within each project's tags.
-  displayProjects = (tagReqArr) => {
+  filterDisplayProjects = (tagReqArr) => {
     let display = this.state.projects.filter(project => {
-
       const containsAll = tagReqArr.length;
       let count = 0;
 
@@ -52,10 +50,15 @@ class App extends Component {
         return true;
       }
       return false;
-
     })
     return display
   };
+
+  // Updating display_projects state based on tags required array.
+  updateStateDisplay = (tagReqArr) => {
+    const display = this.filterDisplayProjects(tagReqArr);
+    this.setState({ display_projects: display});
+  }
 
   selectTag = (selectedTag) => {
     let currTags = this.state.tagReqArr;
@@ -64,11 +67,13 @@ class App extends Component {
       currTags.push(selectedTag);
 
       this.setState({tagReqArr: currTags});
+      this.updateStateDisplay(this.state.tagReqArr);
     } else {
       const removeIndex = currTags.indexOf(selectedTag);
       currTags.splice(removeIndex, 1);
 
       this.setState({tagReqArr: currTags});
+      this.updateStateDisplay(this.state.tagReqArr);
     }
   }
 
@@ -82,6 +87,7 @@ class App extends Component {
           <Gallery
             tagBtnList={this.state.tagBtnList}
             selectTag = {this.selectTag}
+            tagReqArr = {this.state.tagReqArr}
             projects={this.state.display_projects}
           />
 
