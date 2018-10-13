@@ -18,9 +18,9 @@ const Gallery = props => {
             <div className="col-3 p-0 tag-box">
               <div className="border bg-light rounded text-center mb-1">
                 <h5 className="d-block">Tag Selection</h5>
-                <label className="d-inline-block mx-2"><input type="radio" name="tagOptions" />Custom</label>
+                <label className="d-inline-block mx-2"><input id='tagCustRadioId' type="radio" name="tagOptions" />Custom</label>
                 {/* <label className="d-inline-block mx-2"><input type="radio" name="tagOptions" />Show All</label> */}
-                <label className="d-inline-block mx-2"><input type="radio" name="tagOptions" />Clear</label>
+                <label className="d-inline-block mx-2" onClick={()=> props.clearTagFilter()} ><input id='tagClearRadioId' type="radio" name="tagOptions" />Clear</label>
               </div>
               {tagBtnList.map((tagName, index) => (
                 <TagBtns
