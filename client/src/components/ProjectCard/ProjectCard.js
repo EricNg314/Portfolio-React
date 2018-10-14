@@ -3,7 +3,6 @@ import React from 'react';
 import './ProjectCard.css';
 
 const ProjectCard = props => {
-  console.log("." + props['project']['image_ref'].slice(6));
   const image_ref = "." + props['project']['image_ref'].slice(6);
   // console.log(image_ref)
 
