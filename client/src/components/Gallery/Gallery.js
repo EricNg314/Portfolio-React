@@ -15,8 +15,8 @@ const Gallery = props => {
         <div className="container">
           <h2 className="text-center">Gallery</h2>
           <div className="row">
-            <div className="col-3 p-0 tag-box">
-              <div className="border bg-light rounded text-center mb-1">
+            <div className="col-3 p-0 tag-box  bg-trans-white">
+              <div className="rounded text-center my-2">
                 <h5 className="d-block">Tag Selection</h5>
                 <label className="d-inline-block mx-2"><input id='tagCustRadioId' type="radio" name="tagOptions" />Custom</label>
                 {/* <label className="d-inline-block mx-2"><input type="radio" name="tagOptions" />Show All</label> */}
