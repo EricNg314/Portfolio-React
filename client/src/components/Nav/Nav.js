@@ -8,7 +8,7 @@ const Navbar = () => (
       to="/"
       className="navbar-brand text-dark d-block">Eric Ng</Link>
     <hr className="med-scrn" />
-    <div class="md-ml-auto md-my-auto">
+    <div className="md-ml-auto md-my-auto">
       <Link
         to="#aboutId"
         scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}
