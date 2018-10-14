@@ -17,7 +17,7 @@ class App extends Component {
   state = {
     tagBtnList: ['Entertainment', 'HTML', 'CSS', 'Javascript', 'jQuery', 'Bootstrap', 'API', 'Google Firebase', 'Express.js', 'Node.js', 'SQL', 'Sequelize', 'MongoDB', 'React', 'Redux', 'Handlebars'],
     projects: [],
-    tagReqArr: ['Show All'],
+    tagReqArr: [],
     display_projects: []
 
   }
@@ -28,14 +28,19 @@ class App extends Component {
 
   getAllProjects = async () => {
     const response = await getAllProjectsAWS();
-    console.log(response);
     this.setState({ projects: response['data']['data'] });
     this.updateStateDisplay(this.state.tagReqArr);
 
   }
 
-  // Selecting a project only if all selected tag array are within each project's tags.
-  filterDisplayProjects = (tagReqArr) => {
+  // Selecting a project if ALL selected tags are in the array within each project's tags.
+  // NOTE: Currently not in use, using OR conditional instead of AND.
+  filterDisplayProjAnd = (tagReqArr) => {
+    // If there is no tags selected, then show all items.
+    if(tagReqArr.length === 0) {
+      return this.state.projects
+    }
+
     let display = this.state.projects.filter(project => {
       const containsAll = tagReqArr.length;
       let count = 0;
@@ -54,9 +59,32 @@ class App extends Component {
     return display
   };
 
+  // Selecting a project if ANY selected tags are in the array within each project's tags.
+  filterDisplayProjOr = (tagReqArr) => {
+    // If there is no tags selected, then show all items.
+    if(tagReqArr.length === 0) {
+      return this.state.projects
+    }
+
+    let display = this.state.projects.filter(project => {
+      const containsAll = tagReqArr.length;
+      let count = 0;
+
+      for (let i = 0; i < tagReqArr.length; i++) {
+        if (project['tags'].indexOf(tagReqArr[i]) !== -1) {
+          return true;
+        }
+      }
+      return false;
+    })
+    return display
+  };
+
+
   // Updating display_projects state based on tags required array.
   updateStateDisplay = (tagReqArr) => {
-    const display = this.filterDisplayProjects(tagReqArr);
+    // Showing display based on OR tag conditional.
+    const display = this.filterDisplayProjOr(tagReqArr);
     this.setState({ display_projects: display});
   }
 
@@ -79,8 +107,11 @@ class App extends Component {
   }
 
   clearTagFilter = () => {
-    this.setState({tagReqArr: ['Show All']});
-    this.updateStateDisplay(this.state.tagReqArr);
+    // setState takes a moment to update, so can not pass tagReqArr state to function, else it uses old tagReqArr
+    // Would prefer to avoid async await.
+    // Thus passing empty array to invoke function.
+    this.updateStateDisplay([]);
+    this.setState({tagReqArr: []});
   }
 
   render() {
