@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TagBtns from '../TagBtns';
 import ProjectCard from '../ProjectCard';
 
