@@ -9,7 +9,7 @@ import NoMatch from './pages/NoMatch';
 import AboutMe from './components/AboutMe';
 import Gallery from './components/Gallery';
 
-// import ContactMeForm from './components/ContactMeForm';
+import ContactMeForm from './components/ContactMeForm';
 import './App.css';
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
           <Nav />
           <AboutMe />
           <Gallery />
-          {/* <ContactMeForm /> */}
+          <ContactMeForm />
 
           <div className="App w-100">
 

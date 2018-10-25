@@ -127,7 +127,7 @@ class Gallery extends Component {
         <div className="parallax-bg gallery_bg-img1">
           <br></br>
           <div className="container">
-            <h2 className="text-center">Gallery</h2>
+            <h2 className="text-center py-5">Gallery</h2>
             <div className="row">
               <div className="col-3 p-0 tag-box  bg-trans-white">
                 <div className="rounded text-center my-2">
