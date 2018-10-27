@@ -8,16 +8,19 @@ This contains a compilation of my web development projects.
 
 ## Link: https://ericng314.github.io/Portfolio-React/
 
-<img src="assets/images/landing_page.png" width="100%" height="100%">
+<img src="assets/images/landing_page.png" width="100%">
 
 
-## Built With :european_castle:
+# Built With :european_castle:
 
-This portfolio contains links to projects that have utilized the following and many more packages/APIs: 
+This portfolio contains links to projects that have utilized the following and many more packages/APIs.
+
+
+## **Languages, Libraries, and Frameworks:**
 
 | Technology | Type | Description |
 | ----------- | ----- | -------- |
-|[HTML5](https://www.w3.org/TR/html/) | Language | Standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages. |
+| [HTML5](https://www.w3.org/TR/html/) | Language | Standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages. |
 | [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3) | Language | Styling html webpages. |
 | [Bootstrap](https://getbootstrap.com/) | Framework | Open source toolkit for developing with HTML, CSS, and JS. |
 | [Javascript](https://www.javascript.com/) | Language | An object-oriented computer programming language. |
@@ -31,6 +34,10 @@ This portfolio contains links to projects that have utilized the following and m
 | [NPM - axios](https://www.npmjs.com/package/axios) | Module | Promise based HTTP client for the browser and node.js |
 | [NPM - cheerio](https://www.npmjs.com/package/cheerio) | Module | Fast, flexible & lean implementation of core jQuery designed specifically for the server. |
 | [NPM - morgan](https://www.npmjs.com/package/morgan) | Module | HTTP request logger middleware for node.js |
+<br>
+
+## **Database and APIs:**
+| Technology | Type | Description |
 | ----------- | ----- | -------- |
 | [Google Places API](https://developers.google.com/places/web-service/intro) | API | API to search for nearby location information. |
 | [IPData API](https://ipdata.co/) | API | API to retrieve IP address. |
@@ -39,10 +46,16 @@ This portfolio contains links to projects that have utilized the following and m
 | [NPM - mysql2](https://www.npmjs.com/package/mysql2) | Database | An updated version of the [MySQL](https://www.npmjs.com/package/mysql) package required for Sequelize package. |
 | [NPM - mongoose](https://www.npmjs.com/package/mongoose) | DB - ORM | Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. |
 | [NPM - sequelize](https://www.npmjs.com/package/sequelize) | DB - ORM | Sequelize is a promise-based Node.js ORM for Postgres, MySQL, SQLite and Microsoft SQL Server. It features solid transaction support, relations, read replication and more. |
+<br>
+
+## **Cloud:**
+| Technology | Type | Description |
 | ----------- | ----- | -------- |
 | [Serverless Framework](https://serverless.com/) | Framework | The Serverless Framework is a free and open-source web framework written using Node.js. |
 | [AWS Lambda](https://aws.amazon.com/lambda/) | Cloud | AWS Lambda lets you run code without provisioning or managing servers. |
 
+<br>
+<hr>
 
 ## Authors :pray:
 
