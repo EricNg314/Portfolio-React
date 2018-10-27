@@ -18,7 +18,7 @@ const Navbar = () => (
         scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}
         className="lg-d-block_md-d-initial md-mx-1">Gallery</Link>
       <Link smooth
-        to="#contactId"
+        to="#contactMeId"
         scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}
         className="lg-d-block_md-d-initial md-mx-1">Contact</Link>
     </div>
