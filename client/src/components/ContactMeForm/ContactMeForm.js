@@ -42,7 +42,7 @@ class ContactMeForm extends Component {
     };
 
     if (nameCheck && emailCheck) {
-      alert(`Contact page under construction. Sorry ${this.state.name}. In the mean time please visit eric-ng.io`);
+      alert(`Hi ${this.state.name}. Contact page is under construction. In the mean time please visit eric-ng.io, sorry for the inconvenience. Or contact me at my email hello@eric-ng.io`);
     }
 
     event.preventDefault();
