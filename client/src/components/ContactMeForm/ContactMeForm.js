@@ -27,25 +27,18 @@ class ContactMeForm extends Component {
 
   handleSubmit(event) {
     let emailCheck = this.validateEmail(this.state.email);
-    // console.log(emailCheck);
-    // console.log(this.state.name.length);
-    // if (!emailCheck) {
-    //   this.setState({ emailValidation: "Please enter a valid email address." })
-    // } else if (this.state.name.length < 1) {
-    //   console.log("entered if name")
-    //   this.setState({ nameValidation: "Please enter a valid name."})
-    // } else {
-    //   alert('A name was submitted: ' + this.state.name);
-    // }
     let nameCheck = (this.state.name.length > 0);
 
     if (!nameCheck) {
-      console.log("entered if name")
       this.setState({ nameValidation: "Please enter a valid name." })
+    } else {
+      this.setState({ nameValidation: "" })  
     };
 
     if (!emailCheck) {
       this.setState({ emailValidation: "Please enter a valid email address." })
+    } else {
+      this.setState({ emailValidation: "" })
     };
 
     if (nameCheck && emailCheck) {
