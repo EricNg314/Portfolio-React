@@ -1,9 +1,4 @@
 
-.gallery_bg-img1{
-  background-image: url("../images/foggy_road.jpg");
-}
-
-
 .about_bg-img1{
   background-image: url("../images/hand_shake_opportunity.jpg");
 }
@@ -14,5 +9,13 @@
 
 .about_bg-img3{
   background-image: url("../images/FasTrak_Map.jpg");
+}
+
+.gallery_bg-img1{
+  background-image: url("../images/foggy_road.jpg");
+}
+
+.contactMe_bg-img1{
+  background-image: url("../images/envelope.png")
 }
 
