@@ -62,8 +62,22 @@ functions:
     events:
       - http:
           path: projects
-          method: get
+          method: GET
           cors: true
+  contactForm:
+    handler: contactForm.sendContactForm
+    events:
+      - http:
+          path: projects/contact
+          method: POST
+          cors: true
+    environment:
+      CONTACT_FORM_URL: ${file(./serverless.env.yml):dev.CONTACT_FORM_URL}
+      CONTACT_FORM_NAME_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_NAME_KEY}
+      CONTACT_FORM_EMAIL_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_EMAIL_KEY}
+      CONTACT_FORM_TYPEOFPROFESSION_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_TYPEOFPROFESSION_KEY}
+      CONTACT_FORM_TYPEOFPROFESSION_OTHER_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_TYPEOFPROFESSION_OTHER_KEY}
+      CONTACT_FORM_MESSAGE_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_MESSAGE_KEY}
 
 resources:
   Resources:
