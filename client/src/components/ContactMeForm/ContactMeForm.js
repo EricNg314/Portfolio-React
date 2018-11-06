@@ -9,6 +9,10 @@ class ContactMeForm extends Component {
       nameValidation: '',
       email: '',
       emailValidation: '',
+      typeOfProf: '',
+      typeOfProfValidation: '',
+      typeOfProfOther: '',
+      typeOfProfOtherValidation: '',
       message: '',
       messageCnt: 0,
       messageValidation: ''
