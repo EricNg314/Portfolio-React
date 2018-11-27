@@ -78,6 +78,7 @@ functions:
       CONTACT_FORM_TYPEOFPROFESSION_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_TYPEOFPROFESSION_KEY}
       CONTACT_FORM_TYPEOFPROFESSION_OTHER_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_TYPEOFPROFESSION_OTHER_KEY}
       CONTACT_FORM_MESSAGE_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_MESSAGE_KEY}
+      CONTACT_FORM_RECAPTCHA_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_RECAPTCHA_KEY}
 
 resources:
   Resources:
