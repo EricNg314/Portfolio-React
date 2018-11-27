@@ -10,7 +10,9 @@ export function getAllProjectsAWS(){
 
 };
 
-
+export function postContactForm(data){
+  return axios.post('https://uwr1s5qnb4.execute-api.us-west-1.amazonaws.com/production/projects/contact', data);
+}
 
 
 

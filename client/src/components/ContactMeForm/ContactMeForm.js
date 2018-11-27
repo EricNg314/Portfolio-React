@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { postContactForm } from '../../utils/API';
 import "./ContactMeForm.css";
 
 class ContactMeForm extends Component {
@@ -160,6 +161,7 @@ class ContactMeForm extends Component {
                   Character Limit: {this.state.messageCnt}/1000
                 </span>
               </div>
+              <div className="g-recaptcha my-3" data-sitekey="6Ld62nwUAAAAAOypm11zuUeXcCPVjMWAUiRAIRzc"></div>
               <input type="submit" value="Submit" />
             </form>
           </div>
