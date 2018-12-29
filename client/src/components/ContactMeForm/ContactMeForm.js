@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
+import Recaptcha from 'react-recaptcha';
 import { postContactForm } from '../../utils/API';
 import "./ContactMeForm.css";
+
+// Variable to store recaptcha instance
+let recaptchaInstance;
+
+const resetRecaptcha = () => {
+  recaptchaInstance.reset();
+};
 
 class ContactMeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      nameValidation: '',
+      nameVal: '',
       email: '',
-      emailValidation: '',
+      emailVal: '',
       typeOfProf: '',
-      typeOfProfValidation: '',
+      typeOfProfVal: '',
       typeOfProfOther: '',
-      typeOfProfOtherValidation: '',
+      typeOfProfOtherVal: '',
       message: '',
       messageCnt: 0,
-      messageValidation: ''
+      messageVal: '',
+      underConstMsg: '',
+      recaptchaResp: '',
+      recaptchaRespVal: false
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
@@ -33,7 +44,7 @@ class ContactMeForm extends Component {
     const nameCheck = (event.target.value.length > 0);
 
     if (nameCheck) {
-      this.setState({ nameValidation: "" })
+      this.setState({ nameVal: "" })
     }
 
     this.setState({ name: event.target.value });
@@ -45,7 +56,7 @@ class ContactMeForm extends Component {
     // Validating email to clear message if invalid occurred.
     const emailCheck = this.validateEmail(this.state.email);
     if (emailCheck) {
-      this.setState({ emailValidation: "" })
+      this.setState({ emailVal: "" })
     };
 
     this.setState({ email: event.target.value });
@@ -63,7 +74,7 @@ class ContactMeForm extends Component {
     this.setState({
       message: limitMsg,
       messageCnt: messageLength,
-      messageValidation: ''
+      messageVal: ''
     })
   }
 
@@ -79,30 +90,58 @@ class ContactMeForm extends Component {
     }
   }
 
+  // Used to update state, rather than placing into element.
+  updateCaptchaState(response){
+    this.setState({ 
+      recaptchaResp: response, 
+      recaptchaRespVal: true
+    })
+  }
 
-  handleSubmit(event) {
-    // Additional validation
+  handleSubmit = async (event) => {
+
+    event.preventDefault();
+
+    // Additional Validation
     const emailCheck = this.validateEmail(this.state.email);
     const nameCheck = (this.state.name.length > 0);
     const messageCheck = (this.state.message.length <= 1000 && this.state.message.length > 0);
 
     if (!nameCheck) {
-      this.setState({ nameValidation: "Please enter a valid name." })
+      this.setState({ nameVal: "Please enter a valid name." })
     };
 
     if (!emailCheck) {
-      this.setState({ emailValidation: "Please enter a valid email address." })
+      this.setState({ emailVal: "Please enter a valid email address." })
     };
 
     if (!messageCheck) {
-      this.setState({ messageValidation: "Please add a message." })
+      this.setState({ messageVal: "Please add a message." })
     }
 
-    if (nameCheck && emailCheck && messageCheck) {
-      alert(`Hi ${this.state.name}. Contact page is under construction. In the mean time please visit eric-ng.io, sorry for the inconvenience. Or contact me at my email hello@eric-ng.io`);
-    }
+    if (nameCheck && emailCheck && messageCheck && this.state.recaptchaRespVal) {
+      // Setting data to be posted.
+      const data = {
+        recaptcha: this.state.recaptchaResp,
+        name: this.state.name,
+        email: this.state.email,
+        typeOfProfOther: this.state.typeOfProfOther,
+        typeOfProf: this.state.typeOfProf,
+        message: this.state.message
+      }
 
-    event.preventDefault();
+      // Sending post.
+      const response = await postContactForm(data);
+      console.log('after response.')
+      console.log(response.data)
+
+      resetRecaptcha();
+
+      this.setState({
+        recaptchaRespVal: false,
+        underConstMsg: `Hi ${this.state.name}. Sorry for the inconvenience, contact page is under construction. In the mean time please visit eric-ng.io or contact me at my email hello@eric-ng.io`
+      })
+    }
   }
 
   validateEmail(email) {
@@ -127,7 +166,7 @@ class ContactMeForm extends Component {
                     onChange={this.handleChangeName}
                   />
                   <span className="ml-1 text-danger">
-                    {this.state.nameValidation}
+                    {this.state.nameVal}
                   </span>
                 </label>
               </div>
@@ -140,7 +179,7 @@ class ContactMeForm extends Component {
                     onChange={this.handleChangeEmail}
                   />
                   <span className="ml-1 text-danger">
-                    {this.state.emailValidation}
+                    {this.state.emailVal}
                   </span>
                 </label>
               </div>
@@ -154,16 +193,26 @@ class ContactMeForm extends Component {
                   onChange={this.handleChangeMessage}>
                 </textarea>
                 <span className="ml-1 text-danger">
-                  {this.state.messageValidation}
+                  {this.state.messageVal}
                 </span>
                 <span id='msgCounterId' className="ml-1 float-right"
                 >
                   Character Limit: {this.state.messageCnt}/1000
                 </span>
               </div>
-              <div className="g-recaptcha my-3" data-sitekey="6Ld62nwUAAAAAOypm11zuUeXcCPVjMWAUiRAIRzc"></div>
+              <Recaptcha 
+              className="my-3"
+              ref={e => recaptchaInstance = e}
+              sitekey="6Ld62nwUAAAAAOypm11zuUeXcCPVjMWAUiRAIRzc"
+              render="explicit"
+              verifyCallback={(response) => this.updateCaptchaState(response)}
+              />
+              {/* <div id="recaptchaId" className="g-recaptcha my-3" data-sitekey="6Ld62nwUAAAAAOypm11zuUeXcCPVjMWAUiRAIRzc" data-callback=""></div> */}
               <input type="submit" value="Submit" />
             </form>
+            <span>
+              {this.state.underConstMsg}
+            </span>
           </div>
         </div>
       </div>
