@@ -1,4 +1,6 @@
 'use strict';
+// const http = require('http');
+const axios = require('axios');
 
 module.exports.sendContactForm = async (event, context) => {
 
@@ -16,28 +18,55 @@ module.exports.sendContactForm = async (event, context) => {
     };
   };
 
-  // Validating variables information
-  const formName = parsed.name;
-  const formEmail = parsed.email;
-  let formTypeOfProfOther = parsed.typeOfProfOther;
-  let formTypeOfProf = parsed.typeOfProf;
-  const formMessage = parsed.message;
+  function sendForm() {
 
-  if (formTypeOfProfOther !== ''){
-    formTypeOfProf = '__other_option__'
-  };
+    // Validating variables information
+    const formName = parsed.name;
+    const formEmail = parsed.email;
+    let formTypeOfProfOther = parsed.typeOfProfOther;
+    let formTypeOfProf = parsed.typeOfProf;
+    const formMessage = parsed.message;
 
-  console.log(formName);
+    if (formTypeOfProfOther !== '') {
+      formTypeOfProf = '__other_option__'
+    };
 
-  // Creating form object to be posted.
-  let formData = {};
-  formData[process.env.CONTACT_FORM_NAME_KEY] = formName;
-  formData[process.env.CONTACT_FORM_EMAIL_KEY] = formEmail;
-  formData[process.env.CONTACT_FORM_TYPEOFPROFESSION_OTHER_KEY] = formTypeOfProfOther;
-  formData[process.env.CONTACT_FORM_TYPEOFPROFESSION_KEY] = formTypeOfProf;
-  formData[process.env.CONTACT_FORM_MESSAGE_KEY] = formMessage;
+    // Creating form object to be posted.
+    let formData = {};
+    formData[process.env.CONTACT_FORM_NAME_KEY] = formName;
+    formData[process.env.CONTACT_FORM_EMAIL_KEY] = formEmail;
+    formData[process.env.CONTACT_FORM_TYPEOFPROFESSION_OTHER_KEY] = formTypeOfProfOther;
+    formData[process.env.CONTACT_FORM_TYPEOFPROFESSION_KEY] = formTypeOfProf;
+    formData[process.env.CONTACT_FORM_MESSAGE_KEY] = formMessage;
 
-  // TODO: Send HTTP Request.
+    axios.post(CONTACT_FORM_URL, formData);
+
+  }
+
+
+  // Validating recaptcha from client.
+  if (parsed['recaptcha']) {
+    try {
+      const reCapUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.CONTACT_FORM_RECAPTCHA_KEY}&response=${parsed['recaptcha']}`;
+
+      let verifyResult = await axios.post(reCapUrl);
+
+      // reCaptcha response with object key "success" as true or false.
+      if (verifyResult.data["success"] === true) {
+        console.log("captcha valid");
+        // sendForm();
+      } else {
+        console.error("captcha failed validation");
+        console.error(`reCaptcha Error Response: ${verifyResult.data['error-codes'].toString()}`);
+      }
+
+    } catch (err) {
+      return {
+        statusCode: 400,
+        error: `Invalid Captcha Response`
+      }
+    }
+  }
 
 
   return {
@@ -47,8 +76,8 @@ module.exports.sendContactForm = async (event, context) => {
       'Access-Control-Allow-Credentials': true
     },
     body: JSON.stringify({
-      message: 'To Be Continued.'
+      // message: 'To Be Continued.'
+      message: parsed
     }),
   };
 };
-
