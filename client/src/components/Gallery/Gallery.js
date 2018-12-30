@@ -60,8 +60,8 @@ class Gallery extends Component {
     }
 
     let display = this.state.projects.filter(project => {
-      const containsAll = tagReqArr.length;
-      let count = 0;
+      // const containsAll = tagReqArr.length;
+      // let count = 0;
 
       for (let i = 0; i < tagReqArr.length; i++) {
         if (project['tags'].indexOf(tagReqArr[i]) !== -1) {

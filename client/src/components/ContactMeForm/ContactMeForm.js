@@ -34,6 +34,8 @@ class ContactMeForm extends Component {
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeMessage = this.handleChangeMessage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeProf = this.handleChangeProf.bind(this);
+    this.handleChangeProfOther = this.handleChangeProfOther.bind(this);
 
   }
 
@@ -75,6 +77,24 @@ class ContactMeForm extends Component {
       message: limitMsg,
       messageCnt: messageLength,
       messageVal: ''
+    })
+  }
+
+  handleChangeProf(event) {
+    this.setState({
+      typeOfProf: event.target.value,
+      typeOfProfOther: ""
+    })
+    if (event.target.value === "Other"){
+      document.getElementById('profOtherId').style.display="block"
+    } else {
+      document.getElementById('profOtherId').style.display="none"
+    }
+  }
+
+  handleChangeProfOther(event) {
+    this.setState({
+      typeOfProfOther: event.target.value
     })
   }
 
@@ -157,31 +177,69 @@ class ContactMeForm extends Component {
           <div className="col-6">
             <form onSubmit={this.handleSubmit}>
               <small className="text-secondary">All fields are required.</small>
-              <div className="form-group">
-                <label className='d-block'>
-                  <span>Name: </span>
-                  <input
-                    type="text"
-                    value={this.state.name}
-                    onChange={this.handleChangeName}
-                  />
-                  <span className="ml-1 text-danger">
-                    {this.state.nameVal}
-                  </span>
-                </label>
+              <div className="d-flex">
+              <div id="formColumn1Id" className="col-sm-12 col-md-6 d-inline-block">
+                <div className="form-group">
+                  <label className='d-block'>
+                    <span>Name: </span>
+                    <input
+                      type="text"
+                      value={this.state.name}
+                      onChange={this.handleChangeName}
+                    />
+                    <span className="ml-1 text-danger">
+                      {this.state.nameVal}
+                    </span>
+                  </label>
+                </div>
+                <div className="form-group">
+                  <label className='d-block'>
+                    <span>Email: </span>
+                    <input
+                      type="text"
+                      value={this.state.email}
+                      onChange={this.handleChangeEmail}
+                    />
+                    <span className="ml-1 text-danger">
+                      {this.state.emailVal}
+                    </span>
+                  </label>
+                </div>
               </div>
-              <div className="form-group">
-                <label className='d-block'>
-                  <span>Email: </span>
-                  <input
-                    type="text"
-                    value={this.state.email}
-                    onChange={this.handleChangeEmail}
-                  />
-                  <span className="ml-1 text-danger">
-                    {this.state.emailVal}
-                  </span>
-                </label>
+              <div id="formColumn2Id" className="col-sm-12 col-md-6 d-inline-block">
+                <div className="form-group">
+                  <label className='d-block'>
+                    <span>Profession: </span>
+                    <select className="form-control d-inline-block"                       
+                      style={{width: 'auto', height: 'auto'}}
+                      value={this.state.typeOfProf}
+                      onChange={this.handleChangeProf}>
+                      <option value="N/A">N/A</option>
+                      <option value="Recruiter">Recruiter</option>
+                      <option value="Educational">Educational</option>
+                      <option value="Entertainment">Entertainment</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <span className="ml-1 text-danger">
+                      {this.state.typeOfProfVal}
+                    </span>
+                  </label>
+                </div>
+                <div id="profOtherId" className="form-group"
+                style={{display: 'none'}}>
+                  <label>
+                    <span>Other: </span>
+                    <input
+                      type="text"
+                      value={this.state.typeOfProfOther}
+                      onChange={this.handleChangeProfOther}
+                    />
+                    <span className="ml-1 text-danger">
+                      {this.state.typeOfProfOtherVal}
+                    </span>
+                  </label>
+                </div>
+              </div>
               </div>
               <div className="form-group">
                 <label className='d-block'>
@@ -207,7 +265,6 @@ class ContactMeForm extends Component {
               render="explicit"
               verifyCallback={(response) => this.updateCaptchaState(response)}
               />
-              {/* <div id="recaptchaId" className="g-recaptcha my-3" data-sitekey="6Ld62nwUAAAAAOypm11zuUeXcCPVjMWAUiRAIRzc" data-callback=""></div> */}
               <input type="submit" value="Submit" />
             </form>
             <span>
