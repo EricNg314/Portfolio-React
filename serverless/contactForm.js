@@ -18,8 +18,7 @@ module.exports.sendContactForm = async (event, context) => {
     };
   };
 
-  function sendForm() {
-
+  async function sendForm() {
     // Validating variables information
     const formName = parsed.name;
     const formEmail = parsed.email;
@@ -39,8 +38,21 @@ module.exports.sendContactForm = async (event, context) => {
     formData[process.env.CONTACT_FORM_TYPEOFPROFESSION_KEY] = formTypeOfProf;
     formData[process.env.CONTACT_FORM_MESSAGE_KEY] = formMessage;
 
-    axios.post(CONTACT_FORM_URL, formData);
+    try {
+      // TODO: Fix post of form.
+      console.log(`FormData: ${formData.toString()}`)
+      let postFormRes = await axios.post(CONTACT_FORM_URL, formData);
 
+      console.log(`StatusCode: ${postFormRes.status}`)
+
+    } catch (err) {
+      console.error("Post error:")
+      console.error(err)
+      return {
+        statusCode: 400,
+        error: `Invalid Captcha Response`
+      }
+    }
   }
 
 
@@ -54,7 +66,7 @@ module.exports.sendContactForm = async (event, context) => {
       // reCaptcha response with object key "success" as true or false.
       if (verifyResult.data["success"] === true) {
         console.log("captcha valid");
-        // sendForm();
+        sendForm();
       } else {
         console.error("captcha failed validation");
         console.error(`reCaptcha Error Response: ${verifyResult.data['error-codes'].toString()}`);
