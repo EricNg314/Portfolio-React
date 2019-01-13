@@ -10,7 +10,7 @@ const ProjectCard = props => {
     <div className="col-sm-12 col-md-6 col-lg-6">
       <div className="portfolio-card card mx-auto mb-4">
         <a href={props['project']['repo_url']} className='hvr-grow'>
-          <img src={image_ref} className="card-img-top">
+          <img src={image_ref} className="card-img-top" alt={props['project']['image_alt']}>
           </img>
         </a>
         <span className='text-center'>{props['project']['name']}</span>

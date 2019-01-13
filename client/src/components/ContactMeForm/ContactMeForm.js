@@ -1,23 +1,41 @@
 import React, { Component } from 'react';
+import Recaptcha from 'react-recaptcha';
+import { postContactForm } from '../../utils/API';
 import "./ContactMeForm.css";
+
+// Variable to store recaptcha instance
+let recaptchaInstance;
+
+const resetRecaptcha = () => {
+  recaptchaInstance.reset();
+};
 
 class ContactMeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      nameValidation: '',
+      nameVal: '',
       email: '',
-      emailValidation: '',
+      emailVal: '',
+      typeOfProf: '',
+      typeOfProfVal: '',
+      typeOfProfOther: '',
+      typeOfProfOtherVal: '',
       message: '',
       messageCnt: 0,
-      messageValidation: ''
+      messageVal: '',
+      underConstMsg: '',
+      recaptchaResp: '',
+      recaptchaRespVal: false
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeMessage = this.handleChangeMessage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeProf = this.handleChangeProf.bind(this);
+    this.handleChangeProfOther = this.handleChangeProfOther.bind(this);
 
   }
 
@@ -28,7 +46,7 @@ class ContactMeForm extends Component {
     const nameCheck = (event.target.value.length > 0);
 
     if (nameCheck) {
-      this.setState({ nameValidation: "" })
+      this.setState({ nameVal: "" })
     }
 
     this.setState({ name: event.target.value });
@@ -40,7 +58,7 @@ class ContactMeForm extends Component {
     // Validating email to clear message if invalid occurred.
     const emailCheck = this.validateEmail(this.state.email);
     if (emailCheck) {
-      this.setState({ emailValidation: "" })
+      this.setState({ emailVal: "" })
     };
 
     this.setState({ email: event.target.value });
@@ -58,7 +76,25 @@ class ContactMeForm extends Component {
     this.setState({
       message: limitMsg,
       messageCnt: messageLength,
-      messageValidation: ''
+      messageVal: ''
+    })
+  }
+
+  handleChangeProf(event) {
+    this.setState({
+      typeOfProf: event.target.value,
+      typeOfProfOther: ""
+    })
+    if (event.target.value === "Other"){
+      document.getElementById('profOtherId').style.display="block"
+    } else {
+      document.getElementById('profOtherId').style.display="none"
+    }
+  }
+
+  handleChangeProfOther(event) {
+    this.setState({
+      typeOfProfOther: event.target.value
     })
   }
 
@@ -74,30 +110,58 @@ class ContactMeForm extends Component {
     }
   }
 
+  // Used to update state, rather than placing into element.
+  updateCaptchaState(response){
+    this.setState({ 
+      recaptchaResp: response, 
+      recaptchaRespVal: true
+    })
+  }
 
-  handleSubmit(event) {
-    // Additional validation
+  handleSubmit = async (event) => {
+
+    event.preventDefault();
+
+    // Additional Validation
     const emailCheck = this.validateEmail(this.state.email);
     const nameCheck = (this.state.name.length > 0);
     const messageCheck = (this.state.message.length <= 1000 && this.state.message.length > 0);
 
     if (!nameCheck) {
-      this.setState({ nameValidation: "Please enter a valid name." })
+      this.setState({ nameVal: "Please enter a valid name." })
     };
 
     if (!emailCheck) {
-      this.setState({ emailValidation: "Please enter a valid email address." })
+      this.setState({ emailVal: "Please enter a valid email address." })
     };
 
     if (!messageCheck) {
-      this.setState({ messageValidation: "Please add a message." })
+      this.setState({ messageVal: "Please add a message." })
     }
 
-    if (nameCheck && emailCheck && messageCheck) {
-      alert(`Hi ${this.state.name}. Contact page is under construction. In the mean time please visit eric-ng.io, sorry for the inconvenience. Or contact me at my email hello@eric-ng.io`);
-    }
+    if (nameCheck && emailCheck && messageCheck && this.state.recaptchaRespVal) {
+      // Setting data to be posted.
+      const data = {
+        recaptcha: this.state.recaptchaResp,
+        name: this.state.name,
+        email: this.state.email,
+        typeOfProfOther: this.state.typeOfProfOther,
+        typeOfProf: this.state.typeOfProf,
+        message: this.state.message
+      }
 
-    event.preventDefault();
+      // Sending post.
+      const response = await postContactForm(data);
+      console.log('after response.')
+      console.log(response.data)
+
+      resetRecaptcha();
+
+      this.setState({
+        recaptchaRespVal: false,
+        underConstMsg: `Hi ${this.state.name}. Sorry for the inconvenience, contact page is under construction. In the mean time please visit eric-ng.io or contact me at my email hello@eric-ng.io`
+      })
+    }
   }
 
   validateEmail(email) {
@@ -113,31 +177,69 @@ class ContactMeForm extends Component {
           <div className="col-6">
             <form onSubmit={this.handleSubmit}>
               <small className="text-secondary">All fields are required.</small>
-              <div className="form-group">
-                <label className='d-block'>
-                  <span>Name: </span>
-                  <input
-                    type="text"
-                    value={this.state.name}
-                    onChange={this.handleChangeName}
-                  />
-                  <span className="ml-1 text-danger">
-                    {this.state.nameValidation}
-                  </span>
-                </label>
+              <div className="d-flex">
+              <div id="formColumn1Id" className="col-sm-12 col-md-6 d-inline-block">
+                <div className="form-group">
+                  <label className='d-block'>
+                    <span>Name: </span>
+                    <input
+                      type="text"
+                      value={this.state.name}
+                      onChange={this.handleChangeName}
+                    />
+                    <span className="ml-1 text-danger">
+                      {this.state.nameVal}
+                    </span>
+                  </label>
+                </div>
+                <div className="form-group">
+                  <label className='d-block'>
+                    <span>Email: </span>
+                    <input
+                      type="text"
+                      value={this.state.email}
+                      onChange={this.handleChangeEmail}
+                    />
+                    <span className="ml-1 text-danger">
+                      {this.state.emailVal}
+                    </span>
+                  </label>
+                </div>
               </div>
-              <div className="form-group">
-                <label className='d-block'>
-                  <span>Email: </span>
-                  <input
-                    type="text"
-                    value={this.state.email}
-                    onChange={this.handleChangeEmail}
-                  />
-                  <span className="ml-1 text-danger">
-                    {this.state.emailValidation}
-                  </span>
-                </label>
+              <div id="formColumn2Id" className="col-sm-12 col-md-6 d-inline-block">
+                <div className="form-group">
+                  <label className='d-block'>
+                    <span>Profession: </span>
+                    <select className="form-control d-inline-block"                       
+                      style={{width: 'auto', height: 'auto'}}
+                      value={this.state.typeOfProf}
+                      onChange={this.handleChangeProf}>
+                      <option value="N/A">N/A</option>
+                      <option value="Recruiter">Recruiter</option>
+                      <option value="Educational">Educational</option>
+                      <option value="Entertainment">Entertainment</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <span className="ml-1 text-danger">
+                      {this.state.typeOfProfVal}
+                    </span>
+                  </label>
+                </div>
+                <div id="profOtherId" className="form-group"
+                style={{display: 'none'}}>
+                  <label>
+                    <span>Other: </span>
+                    <input
+                      type="text"
+                      value={this.state.typeOfProfOther}
+                      onChange={this.handleChangeProfOther}
+                    />
+                    <span className="ml-1 text-danger">
+                      {this.state.typeOfProfOtherVal}
+                    </span>
+                  </label>
+                </div>
+              </div>
               </div>
               <div className="form-group">
                 <label className='d-block'>
@@ -149,15 +251,25 @@ class ContactMeForm extends Component {
                   onChange={this.handleChangeMessage}>
                 </textarea>
                 <span className="ml-1 text-danger">
-                  {this.state.messageValidation}
+                  {this.state.messageVal}
                 </span>
                 <span id='msgCounterId' className="ml-1 float-right"
                 >
                   Character Limit: {this.state.messageCnt}/1000
                 </span>
               </div>
+              <Recaptcha 
+              className="my-3"
+              ref={e => recaptchaInstance = e}
+              sitekey="6Ld62nwUAAAAAOypm11zuUeXcCPVjMWAUiRAIRzc"
+              render="explicit"
+              verifyCallback={(response) => this.updateCaptchaState(response)}
+              />
               <input type="submit" value="Submit" />
             </form>
+            <span>
+              {this.state.underConstMsg}
+            </span>
           </div>
         </div>
       </div>
