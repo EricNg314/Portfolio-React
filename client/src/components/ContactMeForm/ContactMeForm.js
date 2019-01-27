@@ -18,14 +18,14 @@ class ContactMeForm extends Component {
       nameVal: '',
       email: '',
       emailVal: '',
-      typeOfProf: '',
+      typeOfProf: 'N/A',
       typeOfProfVal: '',
       typeOfProfOther: '',
       typeOfProfOtherVal: '',
       message: '',
       messageCnt: 0,
       messageVal: '',
-      underConstMsg: '',
+      contactResponse: '',
       recaptchaResp: '',
       recaptchaRespVal: false
     };
@@ -93,8 +93,9 @@ class ContactMeForm extends Component {
   }
 
   handleChangeProfOther(event) {
+    const limitProfOther = event.target.value.slice(0, 50);
     this.setState({
-      typeOfProfOther: event.target.value
+      typeOfProfOther: limitProfOther
     })
   }
 
@@ -141,7 +142,7 @@ class ContactMeForm extends Component {
 
     if (nameCheck && emailCheck && messageCheck && this.state.recaptchaRespVal) {
       // Setting data to be posted.
-      const data = {
+      let data = {
         recaptcha: this.state.recaptchaResp,
         name: this.state.name,
         email: this.state.email,
@@ -151,15 +152,20 @@ class ContactMeForm extends Component {
       }
 
       // Sending post.
-      const response = await postContactForm(data);
-      console.log('after response.')
-      console.log(response.data)
-
+      let response = await postContactForm(data);
+      let resData = response.data;
       resetRecaptcha();
+
+      if (resData.success === true){
+        console.log("Sucessfully sent. To be updated.")
+      } else {
+        console.log("Failed to send. To be updated.")
+      }
+
 
       this.setState({
         recaptchaRespVal: false,
-        underConstMsg: `Hi ${this.state.name}. Sorry for the inconvenience, contact page is under construction. In the mean time please visit eric-ng.io or contact me at my email hello@eric-ng.io`
+        contactResponse: `Hi ${this.state.name}. Thank you for reaching out to me, I have sent you an email and will follow up regarding your message.`
       })
     }
   }
@@ -268,7 +274,7 @@ class ContactMeForm extends Component {
               <input type="submit" value="Submit" />
             </form>
             <span>
-              {this.state.underConstMsg}
+              {this.state.contactResponse}
             </span>
           </div>
         </div>

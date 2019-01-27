@@ -25,3 +25,4 @@ yarn-error.log*
 # Serverless files/directories
 .serverless
 serverless.env.yml
+config.json
