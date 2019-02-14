@@ -39,6 +39,20 @@ class ContactMeForm extends Component {
 
   }
 
+  loadCaptcha() {
+    console.log("testing load captcha")
+    let script = document.createElement('script');
+    script.onload = function () {
+    //do stuff with the script
+    console.log("doing stuff in onload")
+    };
+    script.type = "text/javascript";
+    script.src = "https://www.google.com/recaptcha/api.js";
+    // script.async = true;
+    // script.defer = true;
+    document.body.appendChild(script);
+  }
+
   // Updating name state for form submission.
   handleChangeName(event) {
 
@@ -155,13 +169,16 @@ class ContactMeForm extends Component {
       let response = await postContactForm(data);
       let resData = response.data;
       resetRecaptcha();
-
-      if (resData.success === true){
-        console.log("Sucessfully sent. To be updated.")
+      console.log(resData)
+      if (resData.statusCode === 200) {
+        if (resData.body.success === true) {
+          console.log("Message sucessfully sent. To be updated.")
+        } else {
+          console.log("Failed to send. To be updated.")
+        }
       } else {
-        console.log("Failed to send. To be updated.")
+        console.log("Error from server.")
       }
-
 
       this.setState({
         recaptchaRespVal: false,
@@ -179,12 +196,12 @@ class ContactMeForm extends Component {
     return (
       <div id="contactMeId" className="parallax-bg contactMe_bg-img1 py-5 min-h-100vh">
         <h2 className="text-center pb-5">Message Me!</h2>
-        <div className="row justify-content-center ">
+        <div className="d-flex justify-content-center ">
           <div className="col-6">
             <form onSubmit={this.handleSubmit}>
               <small className="text-secondary">All fields are required.</small>
               <div className="d-flex">
-              <div id="formColumn1Id" className="col-sm-12 col-md-6 d-inline-block">
+              <div id="formColumn1Id" className="col-sm-12 col-md-6 px-0 d-inline-block">
                 <div className="form-group">
                   <label className='d-block'>
                     <span>Name: </span>
@@ -212,7 +229,7 @@ class ContactMeForm extends Component {
                   </label>
                 </div>
               </div>
-              <div id="formColumn2Id" className="col-sm-12 col-md-6 d-inline-block">
+              <div id="formColumn2Id" className="col-sm-12 col-md-6 px-0 d-inline-block">
                 <div className="form-group">
                   <label className='d-block'>
                     <span>Profession: </span>
@@ -270,6 +287,7 @@ class ContactMeForm extends Component {
               sitekey="6Ld62nwUAAAAAOypm11zuUeXcCPVjMWAUiRAIRzc"
               render="explicit"
               verifyCallback={(response) => this.updateCaptchaState(response)}
+              onloadCallback={this.loadCaptcha}
               />
               <input type="submit" value="Submit" />
             </form>
