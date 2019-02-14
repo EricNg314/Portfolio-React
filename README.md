@@ -6,7 +6,7 @@ First off, thank you for visiting my page. I hope you enjoy the current portfoli
 
 This contains a compilation of my web development projects.
 
-## Link: https://ericng314.github.io/Portfolio-React/
+## Link: https://eric-ng.io
 
 <img src="assets/images/landing_page.png" width="100%">
 
