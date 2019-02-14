@@ -1,5 +1,5 @@
 {
-  "homepage": "http://EricNg314.github.io/Portfolio-React",
+  "homepage": ".",
   "name": "portfolio-react",
   "version": "0.1.0",
   "private": true,
@@ -10,7 +10,7 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "install": "cd client && yarn install",
-    "build": "cd client && npm run build",
+    "build": "rm -rf build && cd client && npm run build",
     "postbuild": "mv client/build .",
     "deploy": "gh-pages -d build",
     "heroku-postbuild": "npm run build"
