@@ -94,10 +94,10 @@ module.exports.sendContactForm = async (event, context) => {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true
     },
-    body: JSON.stringify({
+    body: {
       success: fnComplete,
       message: 'Confirmed validation and sent information.'
-    }),
+    }
   };
 };
 
