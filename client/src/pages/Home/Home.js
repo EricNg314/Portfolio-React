@@ -24,7 +24,7 @@ class Home extends Component {
 
   render() {
     return (
-        <div className="col-6 m-auto">
+        <div className="col-sm-12 col-md-8 col-md-6 mx-auto md-mt-65px">
           <p className="App-intro">
             Welcome to my new portfolio. Although I am currently improving mobile responsiveness and features, feel free to use the contact form to send me a message. 
             <span> <Link smooth

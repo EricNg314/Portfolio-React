@@ -23,11 +23,6 @@ class App extends Component {
     return (
       <Router>
         <div className="">
-          <Nav />
-          <AboutMe />
-          <Gallery />
-          <ContactMeForm />
-
           <div className="App w-100">
 
             <Switch>
@@ -37,6 +32,11 @@ class App extends Component {
               <Route component={NoMatch} />
             </Switch>
           </div>
+          <Nav />
+          <AboutMe />
+          <Gallery />
+          <ContactMeForm />
+
         </div>
       </Router>
     );

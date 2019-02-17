@@ -17,7 +17,7 @@ const AboutMe = () => (
     </div>
 
     <div id="aboutId" className='parallax-bg about_bg-img1 pt-2'>
-      <div className='container'>
+      <div className='my_container'>
         <div className='bg-white box-shadow'>
           <h1 className='text-center p-3'>My name is Eric!</h1>
           <h4 className='my-0 p-3'>I graduated with an economics degree and was given an opportunity at FasTrak as an Accountant. Using online resources, I learned to code in Visual Basic Application to automate work. </h4>
