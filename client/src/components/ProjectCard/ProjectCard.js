@@ -7,7 +7,7 @@ const ProjectCard = props => {
   // console.log(image_ref)
 
   return (
-    <div className="col-sm-12 col-md-6 col-lg-6">
+    <div className="col-sm-12 col-md-6 col-lg-4">
       <div className="portfolio-card card mx-auto mb-4">
         <a href={props['project']['repo_url']} className='hvr-grow'>
           <img src={image_ref} className="card-img-top" alt={props['project']['image_alt']}>
