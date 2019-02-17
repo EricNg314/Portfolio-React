@@ -26,6 +26,10 @@
   background:rgba(255,255,255,.9)
 }
 
+.navbar-brand {
+  margin: 0px;
+}
+
 @media (max-width: 767px) {
 
   nav {
@@ -36,9 +40,6 @@
   }
   nav.h-100vp{
     height: inherit;
-  }
-  nav > hr.med-scrn {
-    display:none;
   }
   
   .lg-d-block_md-d-initial {

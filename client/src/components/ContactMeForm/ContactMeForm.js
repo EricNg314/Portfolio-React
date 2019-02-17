@@ -194,13 +194,13 @@ class ContactMeForm extends Component {
 
   render() {
     return (
-      <div id="contactMeId" className="parallax-bg contactMe_bg-img1 py-5 min-h-100vh">
+      <div id="contactMeId" className="parallax-bg contactMe_bg-img1 py-5 min-h-100vh bg-attch-unset">
         <h2 className="text-center pb-5">Message Me!</h2>
         <div className="d-flex justify-content-center ">
-          <div className="col-6">
+          <div className="col-12 col-md-8 col-lg-6">
             <form onSubmit={this.handleSubmit}>
               <small className="text-secondary">All fields are required.</small>
-              <div className="d-flex">
+              <div className="md-d-flex">
               <div id="formColumn1Id" className="col-sm-12 col-md-6 px-0 d-inline-block">
                 <div className="form-group">
                   <label className='d-block'>
@@ -281,14 +281,15 @@ class ContactMeForm extends Component {
                   Character Limit: {this.state.messageCnt}/1000
                 </span>
               </div>
-              <Recaptcha 
-              className="my-3"
-              ref={e => recaptchaInstance = e}
-              sitekey="6Ld62nwUAAAAAOypm11zuUeXcCPVjMWAUiRAIRzc"
-              render="explicit"
-              verifyCallback={(response) => this.updateCaptchaState(response)}
-              onloadCallback={this.loadCaptcha}
-              />
+              <div className="mb-3">
+                <Recaptcha 
+                ref={e => recaptchaInstance = e}
+                sitekey="6Ld62nwUAAAAAOypm11zuUeXcCPVjMWAUiRAIRzc"
+                render="explicit"
+                verifyCallback={(response) => this.updateCaptchaState(response)}
+                onloadCallback={this.loadCaptcha}
+                />
+              </div>
               <input type="submit" value="Submit" />
             </form>
             <span>

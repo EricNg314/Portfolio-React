@@ -126,10 +126,10 @@ class Gallery extends Component {
       <div id="galleryId">
         <div className="parallax-bg gallery_bg-img1">
           <br></br>
-          <div className="container">
+          <div className="my_container">
             <h2 className="text-center py-5">Gallery</h2>
             <div className="row">
-              <div className="col-3 p-0 tag-box  bg-trans-white">
+              <div className="col-4 col-sm-4 col-md-3 col-lg-2 p-0 tag-box  bg-trans-white">
                 <div className="rounded text-center my-2">
                   <h5 className="d-block">Tag Selection</h5>
                   <label className="d-inline-block mx-2"><input id='tagCustRadioId' type="radio" name="tagOptions" />Custom</label>
@@ -144,7 +144,7 @@ class Gallery extends Component {
                   />
                 ))}
               </div>
-              <div className="col-9">
+              <div className="col-8 col-sm-8 col-md-9 col-lg-10 lg-rm-px-0">
                 <h5 className="text-center bg-trans-white rounded">{tagSelectedText()}</h5>
                 <div className="row">
                   {projects.map((project, index) => (
