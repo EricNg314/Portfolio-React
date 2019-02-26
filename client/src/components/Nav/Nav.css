@@ -13,3 +13,47 @@
 .box-shadow{
   box-shadow: 0px 0px 10px 3px rgba(255,255,255,.4);
 }
+
+.lg-d-block_md-d-inline-flex{
+  display:block;
+}
+
+.lg-d-block_md-d-initial{
+  display:block;
+}
+
+.bg-trans-white{
+  background:rgba(255,255,255,.9)
+}
+
+.navbar-brand {
+  margin: 0px;
+}
+
+@media (max-width: 767px) {
+
+  nav {
+    width:100%;
+  }
+  .lg-d-block_md-d-inline-flex{
+    display:inline-flex!important;
+  }
+  nav.h-100vp{
+    height: inherit;
+  }
+  
+  .lg-d-block_md-d-initial {
+    display:initial;
+  }
+
+  nav > div.md-ml-auto{
+    margin-left:auto;
+  }
+  nav > div.md-my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  nav > div > a.md-mx-1{
+    margin: 0rem .25rem 0rem;
+  }
+}

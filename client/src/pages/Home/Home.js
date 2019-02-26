@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
 // import logo from './logo.svg';
 import logo from '../../logo.svg';
 import { Col, Row, Container } from "../../components/Grid";
@@ -23,12 +24,14 @@ class Home extends Component {
 
   render() {
     return (
-
-        <div className="w-100">
+        <div className="col-sm-12 col-md-8 col-md-6 mx-auto md-mt-65px">
           <p className="App-intro">
-            Welcome to my new portfolio. It's currently under construction, so please visit my old html/javascript portfolio in the mean time. 
+            Welcome to my new portfolio. Although I am currently improving mobile responsiveness and features, feel free to use the contact form to send me a message. 
+            <span> <Link smooth
+              to="#contactMeId"
+              scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              className="lg-d-block_md-d-initial md-mx-1">Scroll to Contact Form</Link></span>
           </p>
-          <a href="https://ericng314.github.io/Portfolio/">https://eric-ng.io/</a>
         </div>
 
     )

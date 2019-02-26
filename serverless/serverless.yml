@@ -21,61 +21,71 @@ provider:
   name: aws
   runtime: nodejs8.10
   region: us-west-1
-
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
-
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
-
+  iamRoleStatements:
+    - Effect: Allow
+      Resource: "*"
+      Action:
+        - ses:SendEmail
+        - ses:SendRawEmail
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
 
 functions:
   allProjects:
     handler: handler.projects
+    description: List of projects and related data.
     events:
       - http:
           path: projects
-          method: get
+          method: GET
           cors: true
+  contactForm:
+    handler: contactForm.sendContactForm
+    description: Validation and send email using SES service.
+    memorySize: 1024
+    timeout: 10
+    events:
+      - http:
+          path: projects/contact
+          method: POST
+          integration: lambda
+          cors: true
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
+    iamRoleStatements:
+      - Effect: Allow
+        Resource: "*"
+        Action:
+          - ses:SendEmail
+          - ses:SendRawEmail
+          - logs:CreateLogGroup
+          - logs:CreateLogStream
+          - logs:PutLogEvents
+    environment:
+      CONTACT_FORM_URL: ${file(./serverless.env.yml):dev.CONTACT_FORM_URL}
+      CONTACT_FORM_NAME_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_NAME_KEY}
+      CONTACT_FORM_EMAIL_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_EMAIL_KEY}
+      CONTACT_FORM_TYPEOFPROFESSION_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_TYPEOFPROFESSION_KEY}
+      CONTACT_FORM_TYPEOFPROFESSION_OTHER_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_TYPEOFPROFESSION_OTHER_KEY}
+      CONTACT_FORM_MESSAGE_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_MESSAGE_KEY}
+      CONTACT_FORM_RECAPTCHA_KEY: ${file(./serverless.env.yml):dev.CONTACT_FORM_RECAPTCHA_KEY}
+      CONTACT_FORM_MYEMAIL: ${file(./serverless.env.yml):dev.CONTACT_FORM_MYEMAIL}
+      AWS_Email_Region: ${file(./serverless.env.yml):dev.AWS_Email_Region}
 
-resources:
-  Resources:
-    GatewayResponseDefault4XX:
-      Type: 'AWS::ApiGateway::GatewayResponse'
-      Properties:
-        ResponseParameters:
-          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
-          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
-        ResponseType: DEFAULT_4XX
-        RestApiId:
-          Ref: 'ApiGatewayRestApi'
+# resources:
+#   Resources:
+#     GatewayResponseDefault4XX:
+#       Type: 'AWS::ApiGateway::GatewayResponse'
+#       Properties:
+#         ResponseParameters:
+#           gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+#           gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+#         ResponseType: DEFAULT_4XX
+#         RestApiId:
+#           Ref: 'ApiGatewayRestApi'
+
 #=========================================================================
 # functions:
 #   hello:

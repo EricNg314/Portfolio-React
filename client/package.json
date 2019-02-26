@@ -1,5 +1,5 @@
 {
-  "homepage": "http://EricNg314.github.io/Portfolio-React",
+  "homepage": ".",
   "name": "Portfolio-React",
   "version": "0.1.0",
   "description": "My Portfolio in React",
@@ -9,6 +9,7 @@
     "axios": "^0.18.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-recaptcha": "^2.3.10",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.0.14"
   },
