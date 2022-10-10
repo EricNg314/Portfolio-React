@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { HashLink as Link } from 'react-router-hash-link';
+// import { HashLink as Link } from 'react-router-hash-link';
+import { Link } from 'react-router-dom'
 // import logo from './logo.svg';
 import logo from '../../logo.svg';
 import { Col, Row, Container } from "../../components/Grid";

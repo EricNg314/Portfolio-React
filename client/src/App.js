@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import logo from './logo.svg';
 // import { Container } from './components/Grid';
 import Nav from './components/Nav';
@@ -21,16 +22,15 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <BrowserRouter>
         <div className="">
           <div className="App w-100">
-
-            <Switch>
+            <Routes>
               <Route exact path="/" component={Home} />
               <Route exact path="/Portfolio-React/" component={Home} />
               <Route exact path="/gallery" component={Gallery} />
               <Route component={NoMatch} />
-            </Switch>
+            </Routes>
           </div>
           <Nav />
           <AboutMe />
@@ -38,7 +38,7 @@ class App extends Component {
           <ContactMeForm />
 
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }
