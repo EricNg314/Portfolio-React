@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import logo from './logo.svg';
 // import { Container } from './components/Grid';
 import Nav from './components/Nav';
 import Home from './pages/Home';
@@ -26,10 +24,10 @@ class App extends Component {
         <div className="">
           <div className="App w-100">
             <Routes>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/Portfolio-React/" component={Home} />
-              <Route exact path="/gallery" component={Gallery} />
-              <Route component={NoMatch} />
+              <Route exact path="/" element={<Home/>} />
+              <Route exact path="/Portfolio-React/" element={<Home/>} />
+              <Route exact path="/gallery" element={<Gallery/>} />
+              <Route element={<NoMatch/>} />
             </Routes>
           </div>
           <Nav />
